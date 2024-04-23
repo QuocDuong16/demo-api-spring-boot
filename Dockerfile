@@ -1,14 +1,15 @@
-# Sử dụng một image cơ sở với Java đã cài đặt
-FROM openjdk:11-jdk
+#
+# Build stage
+#
+FROM maven:3.8.3-openjdk-17 AS build
+COPY . .
+RUN mvn clean install
 
-# Sao chép các tệp JAR từ máy tính cục bộ vào image
-COPY target/demo-0.0.1-SNAPSHOT.jar /app/app.jar
-
-# Định nghĩa thư mục làm việc mặc định cho ứng dụng
-WORKDIR /app
-
-# Cổng mà ứng dụng Spring Boot chạy trên
+#
+# Package stage
+#
+FROM eclipse-temurin:17-jdk
+COPY --from=build /target/demo-0.0.1-SNAPSHOT.jar demo.jar
+# ENV PORT=8080
 EXPOSE 8080
-
-# Lệnh để chạy ứng dụng Spring Boot khi container được khởi chạy
-CMD ["java", "-jar", "app.jar"]
+ENTRYPOINT ["java","-jar","demo.jar"]
