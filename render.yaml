@@ -1,0 +1,16 @@
+services:
+  - type: web
+    name: demo-spring-boot-app
+    env: docker
+    plan: free
+    dockerfilePath: Dockerfile
+    buildCommand: ""
+    startCommand: ""
+    autoDeploy: true
+    envVars:
+      - key: DATABASE_URL
+        value: jdbc:postgresql://dpg-cp1ijfud3nmc73dhpi40-a.singapore-postgres.render.com/demo_5io2
+      - key: DATABASE_USERNAME
+        value: demo_5io2_user
+      - key: DATABASE_PASSWORD
+        value: zYlPIy85qfNzZ8DD1qdP9pVfgUrw9AEY
