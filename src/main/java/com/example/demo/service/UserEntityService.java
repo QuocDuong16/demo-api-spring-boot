@@ -1,27 +1,27 @@
 package com.example.demo.service;
 
-import com.example.demo.entity.User;
-import com.example.demo.repository.UserRepository;
+import com.example.demo.entity.UserEntity;
+import com.example.demo.repository.UserEntityRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
 
 @Service
-public class UserService {
+public class UserEntityService {
 
     @Autowired
-    private UserRepository userRepository;
+    private UserEntityRepository userRepository;
 
-    public List<User> getAllUsers() {
+    public List<UserEntity> getAllUsers() {
         return userRepository.findAll();
     }
 
-    public User getUserById(Long id) {
+    public UserEntity getUserById(Long id) {
         return userRepository.findById(id).orElse(null);
     }
 
-    public User createUser(User user) {
+    public UserEntity createUser(UserEntity user) {
         return userRepository.save(user);
     }
 
